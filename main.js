@@ -12,7 +12,7 @@ const app = express();
 const program = require('commander');
 program
 	.version('0.1.0')
-	.option('-p, --port [port]', 'the port on which the server will listen for connections.')
+	.option('-p, --port <n>', 'the port on which the server will listen for connections.', parseInt)
 	.parse(process.argv);
 
 const port = program.port || 3555;
