@@ -13,12 +13,13 @@ const program = require('commander');
 program
 	.version('0.1.0')
 	.option('-p, --port <n>', 'the port on which the server will listen for connections.', parseInt)
+	.option('-b, --branch [branch]', 'the branch on which to listen for changes. use * for all branches')
 	.parse(process.argv);
 
 const port = program.port || 3555;
+const branch = typeof program.branch === 'string' ? program.branch : '*' || '*';
 
 const command = './build.sh';
-const branch = 'dev-deploy';
 
 const pathToSecret = './secret';
 var secret = '';
@@ -31,7 +32,7 @@ app.post('/payload', function (req, res) {
 		return;
 	}
 	res.status(200).end();
-	if(req.body.ref === 'refs/heads/' + branch) {
+	if(branch === '*' || req.body.ref === 'refs/heads/' + branch) {
 		exec(command, (err, stdout, stderr) => {
 			console.log(stdout);
 			console.log(stderr);
