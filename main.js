@@ -9,7 +9,13 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-const port = 3555;
+const program = require('commander');
+program
+	.version('0.1.0')
+	.option('-p, --port [port]', 'the port on which the server will listen for connections.')
+	.parse(process.argv);
+
+const port = program.port || 3555;
 
 const command = './build.sh';
 const branch = 'dev-deploy';
