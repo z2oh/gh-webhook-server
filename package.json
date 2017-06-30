@@ -4,6 +4,7 @@
   "description": "A GitHub bot to add an automated build step to GitHub pages",
   "main": "main.js",
   "scripts": {
+    "start": "node main.js",
     "test": "npm test"
   },
   "repository": {
