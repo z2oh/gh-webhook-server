@@ -1,0 +1,28 @@
+{
+  "name": "pages-build-bot",
+  "version": "0.1.0",
+  "description": "A GitHub bot to add an automated build step to GitHub pages",
+  "main": "main.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/z2oh/pages-build-bot.git"
+  },
+  "keywords": [
+    "github",
+    "bot",
+    "pages",
+    "build"
+  ],
+  "author": "Jeremy Day < z2oh.github.io >",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/z2oh/pages-build-bot/issues"
+  },
+  "homepage": "https://github.com/z2oh/pages-build-bot#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
