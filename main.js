@@ -16,17 +16,19 @@ program
 	.option('-b, --branch [branch]', 'the branch on which to listen for changes. use * for all branches')
 	.option('-c, --command [command]', 'a shell command to run. surround with quotes')
 	.option('-s, --secret [path]', 'path to the secret file')
+	.option('--endpoint [endpoint]', 'the endpoint on which the server will listen for POSTs')
 	.parse(process.argv);
 
 const port = program.port || 3555;
 const branch = typeof program.branch === 'string' ? program.branch : '*' || '*';
 const command = program.command || '';
 const pathToSecret = program.secret || './secret';
+const endpoint = program.endpoint || '/';
 
 var secret = '';
 
 app.use(bodyParser.json());
-app.post('/payload', function (req, res) {
+app.post(endpoint, function (req, res) {
 	var hash = crypto.createHmac('sha1', secret).update(JSON.stringify(req.body)).digest('hex');
 	if(!crypto.timingSafeEqual(Buffer.from(req.get('X-Hub-Signature'), 'utf8'), Buffer.from('sha1=' + hash), 'utf8')) {
 		res.status(401).end();
