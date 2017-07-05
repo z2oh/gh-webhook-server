@@ -15,13 +15,14 @@ program
 	.option('-p, --port <n>', 'the port on which the server will listen for connections.', parseInt)
 	.option('-b, --branch [branch]', 'the branch on which to listen for changes. use * for all branches')
 	.option('-c, --command [command]', 'a shell command to run. surround with quotes')
+	.option('-s, --secret [path]', 'path to the secret file')
 	.parse(process.argv);
 
 const port = program.port || 3555;
 const branch = typeof program.branch === 'string' ? program.branch : '*' || '*';
 const command = program.command || '';
+const pathToSecret = program.secret || './secret';
 
-const pathToSecret = './secret';
 var secret = '';
 
 app.use(bodyParser.json());
